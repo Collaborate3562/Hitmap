@@ -6,8 +6,11 @@ import { PiArrowUpRightThin, PiStarOfDavidDuotone } from "react-icons/pi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
-import Header from '../components/Header'
+import Header from "../components/Header";
 import Footer from "../components/Footer";
+import WhatIsHItmap from "../components/WhatIsHitmap";
+
+import { useTranslation } from "react-i18next";
 
 const swiperLists = [
   {
@@ -32,43 +35,32 @@ const swiperLists = [
   },
 ];
 
-const lists = [
-  {
-    text: "ALL YOUR DECISIONS CAN BE SUPPORTED WITH OBJECTIVE DATA, LEAVING ASIDE SUBJECTIVITY.",
-  },
-  {
-    text: "WE GROUP AND ANALYZE MULTIPLE LAYERS OF DATA, WITH MORE THAN 800 VARIABLES, IMPOSSIBLE TO HANDLE MANUALLY.",
-  },
-  {
-    text: "BY USING ADVANCED ALGORITHMS WE CAN PREDICT BEHAVIORS, SO YOU CAN MAKE INFORMED DECISIONS WITH LESS RISK.",
-  },
-  {
-    text: "ADAPTED TO THE NEEDS OF YOUR BUSINESS, OUR PLATFORM IS 100% CUSTOMIZABLE ACCORDING TO THE BUSINESS AND CLIENT REQUIREMENTS.",
-  },
-  {
-    text: "WE DELIVER SOME INDICATORS, WHICH SUMMARIZE HUNDREDS OF DATA, SO THAT YOU CAN MANAGE THE INFORMATION IN A SIMPLE WAY.",
-  },
-  {
-    text: "WE GEO-REFERENCE ALL THE INFORMATION ON A MAP, SO THAT YOU CAN VIEW IT QUICKLY AND EASILY.",
-  },
-];
-
 const Index = () => {
+  const { t, i18n } = useTranslation();
+
+  const onClickLanguageChange = (e: any) => {
+    const language = e.target.value;
+    i18n.changeLanguage(language);
+  };
+
   const { authenticated, setAuthenticated } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [serviceNum, setServiceNum] = useState(0);
 
   const navigate = useNavigate();
 
   const handleOpenMenu = () => {
     setIsOpen(!isOpen);
   };
+  const handleOpenModal = (num: number) => {
+    setOpenModal(true);
+    setServiceNum(num);
+  };
 
   return (
     <>
-      <Header 
-        isOpen={isOpen}
-        handleIsOpen={handleOpenMenu}
-        />
+      <Header isOpen={isOpen} handleIsOpen={handleOpenMenu} />
       {isOpen === false && (
         <div className="bg-custom-image bg-cover back-ground pt-[100px] pb-[220px]">
           <h2 className="text-xl font-[700] text-center text-[#505050]">
@@ -78,9 +70,12 @@ const Index = () => {
             TERRITORIAL INTELLIGENCE
           </p>
           <div className="mt-12 flex justify-center">
-            <button className=" flex items-center border border-solid-[#2c2c2c]" onClick={handleOpenMenu}>
+            <button
+              className=" flex items-center border border-solid-[#2c2c2c]"
+              onClick={handleOpenMenu}
+            >
               <span className=" px-8 py-2.5 text-base text-[#0E0E0E] border-r border-solid-[#2c2c2c] font-[600]">
-                START NOW
+                {t("startNow")}
               </span>
               <div className="py-2.5 px-2">
                 <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
@@ -97,19 +92,23 @@ const Index = () => {
                 Navigation
               </h2>
               <div className="mt-10 flex justify-between items-center">
-                <a className="text-md-10 text-white" href="#what">WHAT IS HITMAP</a>
+                <a className="text-md-10 text-white" href="#what">
+                  {t("whatIsHItmap")}
+                </a>
                 <PiArrowUpRightThin className="text-[#61ADF4] text-md-7" />
               </div>
               <div className="mt-5 flex justify-between items-center">
-                <a className="text-md-10 text-white" href="#services">SERVICES</a>
+                <a className="text-md-10 text-white" href="#services">
+                  {t("services")}
+                </a>
                 <PiArrowUpRightThin className="text-[#61ADF4] text-md-7" />
               </div>
               <div className="mt-5 flex justify-between items-center">
-                <p className="text-md-10 text-white">ABOUT US</p>
+                <p className="text-md-10 text-white">{t("aboutUs")}</p>
                 <PiArrowUpRightThin className="text-[#61ADF4] text-md-7" />
               </div>
               <div className="mt-5 flex justify-between items-center">
-                <p className="text-md-10 text-white">FAQS</p>
+                <p className="text-md-10 text-white">{t("faqs")}</p>
                 <PiArrowUpRightThin className="text-[#61ADF4] text-md-7 " />
               </div>
             </div>
@@ -156,6 +155,19 @@ const Index = () => {
                 <p className="text-md-10 text-white">SIGN UP</p>
                 <PiArrowUpRightThin className="text-[#61ADF4] text-md-7" />
               </div>
+              <select
+                className="mt-[100px] border border-white px-5 py-2 bg-black text-md text-white focus:outline-none"
+                name=""
+                id=""
+                onChange={onClickLanguageChange}
+              >
+                <option value="en" className="text-md text-white">
+                  En
+                </option>
+                <option value="es" className="text-md text-white">
+                  Es
+                </option>
+              </select>
             </div>
           </div>
         </div>
@@ -171,62 +183,21 @@ const Index = () => {
           className="w-full"
         ></video>
       </div>
-      <div className="grid 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1" id="what">
-        <div className="cols-span-2 pr-5 pt-12 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] rounded-r-[24px]">
-          <div className="grid grid-cols-3 gap-4">
-            <div className="..."></div>
-            <div className="col-span-2 ...">
-              <div>
-                <h2 className="text-lg-2 font-[700] inline pb-7 border-b-2 border-solid-[#505050]">
-                  WHAT IS HITMAP?
-                </h2>
-              </div>
-              <div className="mt-12">
-                <p className="pt-12 text-[#4c4c4c] text-sm-1">
-                  We are a company that analyzes and compiles large amounts of
-                  data through territorial intelligence, with the aim of
-                  providing useful information, which considers all variables,
-                  but with indicators that in a simplified way make informed
-                  decisions and therefore with less associated risk.
-                </p>
-                <p className="pt-10 text-[#4c4c4c] text-sm-1">
-                  With our services they will be able to make their future
-                  decisions based on objective data, leaving aside intuition.
-                  These include the study of sales prediction, market potential
-                  and the city’s expansion process.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="cols-span-3 flex justify-center">
-          <img src="imgs/global.png" className="w-2/3 align-top" alt="" />
-        </div>
-      </div>
-      <div className="mt-12 2xl:container xl:container lg:container md:container sm:container mx-auto px-12 py-12 bg-gradient-to-r from-[#61ADF4] to-[#88C3FA] rounded-[20px]">
-        <p className="px-12 py-8 2xl:w-3/5 xl:w-3/5 lg:w-3/5 md:w-full mx-auto text-md text-white ">
-          DELIVERING RELEVANT INFORMATION FOR DECISION MAKING THROUG A FRIENDLY
-          AND ILLUSTRATIVE INTERFACE.
-        </p>
-      </div>
-      <div className="mt-10 2xl:container xl:container lg:container md:container sm:container mx-auto grid 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 gap-10">
-        {lists &&
-          lists.map((item, index) => (
-            <div
-              className="px-12 py-8 border border-solid-[#000] rounded-[20px]"
-              key={index}
-            >
-              <button className="px-8 py-4 border border-solid-[#828282] rounded-[23px]"></button>
-              <p className="mt-5 text-md text-[#424242]">{item.text}</p>
-            </div>
-          ))}
-      </div>
-      <div className="mt-12 2xl:container xl:container lg:container md:container sm:container mx-auto" id="services">
+      <WhatIsHItmap />
+      <div
+        className="mt-12 2xl:container xl:container lg:container md:container sm:container mx-auto"
+        id="services"
+      >
         <h2 className="py-12 2xl:text-lg-6 xl:text-lg-6 lg:text-lg-6 md:text-lg-5 sm:text-lg-5 border-b border-solid-[#BFBFBF]">
           SERVICES WE OFFER
         </h2>
-        <div className="py-12 flex justify-between border-b border-solid-[#BFBFBF]">
-          <p className="text-lg-3">NEW LOCATIONS</p>
+        <div className="py-12 flex justify-between items-center border-b border-solid-[#BFBFBF]">
+          <p
+            className="2xl:text-lg-3 xl:text-lg-3 lg:text-lg-3 md:text-lg-1 sm:text-lg-1 cursor-pointer"
+            onClick={() => handleOpenModal(1)}
+          >
+            {t("newLocations")}
+          </p>
           <div className="relative">
             <input
               type="search"
@@ -237,9 +208,86 @@ const Index = () => {
               <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
             </div>
           </div>
+
+          {openModal && serviceNum === 1 && (
+            <div>
+              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                <div className="relative w-auto my-6 mx-auto max-w-6xl">
+                  {/*content*/}
+                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                    {/*header*/}
+                    <div className="flex items-center justify-between py-12 pl-12 pr-5 mx-12 rounded-t">
+                      <h3 className="text-lg-7 font-semibold">
+                        {t("newLocations")}
+                      </h3>
+                      <button
+                        className="p-1 ml-auto bg-transparent border-0 text-black float-right text-lg-7 leading-none font-semibold outline-none focus:outline-none"
+                        onClick={() => setOpenModal(false)}
+                      >
+                        <span className="bg-transparent text-blacktext-lg-7 block outline-none focus:outline-none">
+                          ×
+                        </span>
+                      </button>
+                    </div>
+                    {/*body*/}
+                    <div className="relative p-10 flex-auto mx-12 rounded-[20px] bg-gradient-to-r from-[#3183CF] to-[#7DBBF5]">
+                      <p className="my-4 text-white text-md leading-relaxed">
+                        {t("howThisService")}
+                      </p>
+                      <p className="my-4 text-white text-md leading-relaxed">
+                        {t("newLocationsContent")}
+                      </p>
+                    </div>
+                    {/*footer*/}
+                    <div className="mt-8 pb-10 rounded-b">
+                      <div className="flex justify-center items-center">
+                        <p className="px-10 text-center text-[#343434] text-xs-2 font-[500] w-1/3">
+                          {t("newLocationsText1")}
+                        </p>
+                        <div className="px-10 text-center text-[#343434] w-1/3">
+                          <p className="text-xs-2 font-[500]">
+                            {t("newLocationsText2")}
+                          </p>
+                          <p className="text-lg-7 font-[500]">80%</p>
+                          <p className="text-xs-2 font-[500]">
+                            {t("newLocationsText3")}
+                          </p>
+                        </div>
+                        <p className="px-10 text-center text-[#343434] text-xs-2 font-[500] w-1/3">
+                          {t("newLocationsText4")}
+                        </p>
+                      </div>
+                      <div className="mt-2 flex justify-center">
+                        <img src="/imgs/modal1.png" alt="" />
+                      </div>
+                      <div className="mt-10 flex justify-center">
+                        <button
+                          className="flex items-center border border-solid-[#2c2c2c]"
+                          onClick={handleOpenMenu}
+                        >
+                          <span className=" px-8 py-2.5 text-base text-[#0E0E0E] border-r border-solid-[#2c2c2c] font-[600]">
+                            {t("startNow")}
+                          </span>
+                          <div className="py-2.5 px-2">
+                            <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+            </div>
+          )}
         </div>
-        <div className="py-12 flex justify-between border-b border-solid-[#BFBFBF]">
-          <p className="text-lg-3">ASSET MANAGEMENT</p>
+        <div className="py-12 flex justify-between items-center border-b border-solid-[#BFBFBF]">
+          <p
+            className="2xl:text-lg-3 xl:text-lg-3 lg:text-lg-3 md:text-lg-1 sm:text-lg-1 cursor-pointer"
+            onClick={() => handleOpenModal(2)}
+          >
+            {t("assetManagement")}
+          </p>
           <div className="relative">
             <input
               type="search"
@@ -250,9 +298,82 @@ const Index = () => {
               <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
             </div>
           </div>
+
+          {openModal && serviceNum === 2 && (
+            <div>
+              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                <div className="relative w-auto my-6 mx-auto max-w-6xl">
+                  {/*content*/}
+                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                    {/*header*/}
+                    <div className="flex items-center justify-between py-12 pl-12 pr-5 mx-12 rounded-t">
+                      <h3 className="text-lg-7 font-semibold">
+                        {t("assetManagement")}
+                      </h3>
+                      <button
+                        className="p-1 ml-auto bg-transparent border-0 text-black float-right text-lg-7 leading-none font-semibold outline-none focus:outline-none"
+                        onClick={() => setOpenModal(false)}
+                      >
+                        <span className="bg-transparent text-blacktext-lg-7 block outline-none focus:outline-none">
+                          ×
+                        </span>
+                      </button>
+                    </div>
+                    {/*body*/}
+                    <div className="relative p-10 flex-auto mx-12 rounded-[20px] bg-gradient-to-r from-[#3183CF] to-[#7DBBF5]">
+                      <p className="my-4 text-white text-md leading-relaxed">
+                        {t("howThisService")}
+                      </p>
+                      <p className="my-4 text-white text-md leading-relaxed">
+                        {t("assetManagementContent")}
+                      </p>
+                    </div>
+                    {/*footer*/}
+                    <div className="mt-8 pb-10 rounded-b">
+                      <div className="flex justify-center items-center">
+                        <p className="px-10 text-center text-[#343434] text-xs-2 font-[500] w-1/3">
+                          {t("assetManagementText1")}
+                        </p>
+                        <div className="px-10 text-center text-[#343434] w-1/3">
+                          <p className="text-xs-2 font-[500]">
+                            {t("assetManagementText2")}
+                          </p>
+                        </div>
+                        <p className="px-10 text-center text-[#343434] text-xs-2 font-[500] w-1/3">
+                          {t("assetManagementText3")}
+                        </p>
+                      </div>
+                      <div className="mt-2 flex justify-center">
+                        <img src="/imgs/modal1.png" alt="" />
+                      </div>
+                      <div className="mt-10 flex justify-center">
+                        <button
+                          className="flex items-center border border-solid-[#2c2c2c]"
+                          onClick={handleOpenMenu}
+                        >
+                          <span className=" px-8 py-2.5 text-base text-[#0E0E0E] border-r border-solid-[#2c2c2c] font-[600]">
+                            {t("startNow")}
+                          </span>
+                          <div className="py-2.5 px-2">
+                            <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+            </div>
+          )}
         </div>
-        <div className="py-12 flex justify-between border-b border-solid-[#BFBFBF]">
-          <p className="text-lg-3">IN-DEPTH STUDY OF ZONE RECOMMENDATION</p>
+        <div className="py-12 flex justify-between items-center border-b border-solid-[#BFBFBF]">
+          <p
+            className="2xl:text-lg-3 xl:text-lg-3 lg:text-lg-3 md:text-lg-1 sm:text-lg-1 cursor-pointer"
+            onClick={() => handleOpenModal(3)}
+          >
+            {t("inDepthStudy")}
+          </p>
           <div className="relative">
             <input
               type="search"
@@ -263,9 +384,77 @@ const Index = () => {
               <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
             </div>
           </div>
+
+          {openModal && serviceNum === 3 && (
+            <div>
+              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                <div className="relative w-auto my-6 mx-auto max-w-6xl">
+                  {/*content*/}
+                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                    {/*header*/}
+                    <div className="flex items-center justify-between py-12 pl-12 pr-5 mx-12 rounded-t">
+                      <h3 className="text-lg-7 font-semibold">
+                        {t("inDepthStudy")}
+                      </h3>
+                      <button
+                        className="p-1 ml-auto bg-transparent border-0 text-black float-right text-lg-7 leading-none font-semibold outline-none focus:outline-none"
+                        onClick={() => setOpenModal(false)}
+                      >
+                        <span className="bg-transparent text-blacktext-lg-7 block outline-none focus:outline-none">
+                          ×
+                        </span>
+                      </button>
+                    </div>
+                    {/*body*/}
+                    <div className="relative p-10 flex-auto mx-12 rounded-[20px] bg-gradient-to-r from-[#3183CF] to-[#7DBBF5]">
+                      <p className="my-4 text-white text-md leading-relaxed">
+                        {t("howThisService")}
+                      </p>
+                      <p className="my-4 text-white text-md leading-relaxed">
+                        {t("inDepthStudyContent")}
+                      </p>
+                    </div>
+                    {/*footer*/}
+                    <div className="mt-8 pb-10 rounded-b">
+                      <div className="flex justify-center items-center">
+                        <p className="px-10 text-center text-[#343434] text-xs-2 font-[500] w-1/3">
+                          {t("inDepthStudyText1")}
+                        </p>
+                        <p className="px-10 text-center text-[#343434] text-xs-2 font-[500] w-1/3">
+                          {t("inDepthStudyText2")}
+                        </p>
+                      </div>
+                      <div className="mt-2 flex justify-center">
+                        <img src="/imgs/modal2.png" alt="" />
+                      </div>
+                      <div className="mt-10 flex justify-center">
+                        <button
+                          className="flex items-center border border-solid-[#2c2c2c]"
+                          onClick={handleOpenMenu}
+                        >
+                          <span className=" px-8 py-2.5 text-base text-[#0E0E0E] border-r border-solid-[#2c2c2c] font-[600]">
+                            {t("startNow")}
+                          </span>
+                          <div className="py-2.5 px-2">
+                            <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+            </div>
+          )}
         </div>
-        <div className="py-12 flex justify-between border-b border-solid-[#BFBFBF]">
-          <p className="text-lg-3">CAPITAL GAIN PREDICTION</p>
+        <div className="py-12 flex justify-between items-center border-b border-solid-[#BFBFBF]">
+          <p
+            className="2xl:text-lg-3 xl:text-lg-3 lg:text-lg-3 md:text-lg-1 sm:text-lg-1 cursor-pointer"
+            onClick={() => handleOpenModal(4)}
+          >
+            {t("capitalGain")}
+          </p>
           <div className="relative">
             <input
               type="search"
@@ -276,6 +465,76 @@ const Index = () => {
               <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
             </div>
           </div>
+
+          {openModal && serviceNum === 4 && (
+            <div>
+              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                <div className="relative w-auto my-6 mx-auto max-w-6xl">
+                  {/*content*/}
+                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                    {/*header*/}
+                    <div className="flex items-center justify-between py-12 pl-12 pr-5 mx-12 rounded-t">
+                      <h3 className="text-lg-7 font-semibold">
+                        {t("capitalGain")}
+                      </h3>
+                      <button
+                        className="p-1 ml-auto bg-transparent border-0 text-black float-right text-lg-7 leading-none font-semibold outline-none focus:outline-none"
+                        onClick={() => setOpenModal(false)}
+                      >
+                        <span className="bg-transparent text-blacktext-lg-7 block outline-none focus:outline-none">
+                          ×
+                        </span>
+                      </button>
+                    </div>
+                    {/*body*/}
+                    <div className="relative p-10 flex-auto mx-12 rounded-[20px] bg-gradient-to-r from-[#3183CF] to-[#7DBBF5]">
+                      <p className="my-4 text-white text-md leading-relaxed">
+                        {t("howThisService")}
+                      </p>
+                      <p className="my-4 text-white text-md leading-relaxed">
+                        {t("capitalGainContent")}
+                      </p>
+                    </div>
+                    {/*footer*/}
+                    <div className="mt-8 pb-10 rounded-b">
+                      <div className="flex justify-center items-center">
+                        <p className="px-10 text-center text-[#343434] text-xs-2 font-[500] w-1/3">
+                          {t("capitalGainText1")}
+                        </p>
+                        <div className="px-10 text-center text-[#343434] w-1/3">
+                          <p className="text-lg-7 font-[500]">80%</p>
+                          <p className="text-xs-2 font-[500]">{t("capitalGainText2")}</p>
+                          <p className="text-xs-2 font-[500]">
+                          {t("capitalGainText3")}
+                          </p>
+                        </div>
+                        <p className="px-10 text-center text-[#343434] text-xs-2 font-[500] w-1/3">
+                        {t("capitalGainText4")}
+                        </p>
+                      </div>
+                      <div className="mt-2 flex justify-center">
+                        <img src="/imgs/modal1.png" alt="" />
+                      </div>
+                      <div className="mt-10 flex justify-center">
+                        <button
+                          className="flex items-center border border-solid-[#2c2c2c]"
+                          onClick={handleOpenMenu}
+                        >
+                          <span className=" px-8 py-2.5 text-base text-[#0E0E0E] border-r border-solid-[#2c2c2c] font-[600]">
+                            {t("startNow")}
+                          </span>
+                          <div className="py-2.5 px-2">
+                            <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+            </div>
+          )}
         </div>
       </div>
       <div className="mt-12 pt-[80px] pb-[30px] bg-gradient-to-b from-[#3183CF] to-white grid 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1 gap-10">
@@ -297,14 +556,12 @@ const Index = () => {
                 SCALEUP TO UK
               </h2>
               <p className="mt-[50px] text-md w-5/6 text-[#1B1B1B]">
-                We were selected among the 50 companies in America that can
-                scale up to the UK according to a Scaleup to UK report supported
-                by the United Kingdom Department of International Trade.
+                {t("reporte")}
               </p>
               <div className="mt-[100px] flex ">
                 <button className=" flex items-center border border-solid-[#2c2c2c]">
                   <span className=" px-8 py-2.5 text-base text-[#0E0E0E] border-r border-solid-[#2c2c2c]">
-                    START NOW
+                    {t("viewMore")}
                   </span>
                   <div className="py-2.5 px-2">
                     <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
@@ -319,19 +576,19 @@ const Index = () => {
         </div>
       </div>
       <div className="mt-12 2xl:container xl:container lg:container md:container sm:container mx-auto">
-        <h2 className="text-md-6">VARIABLES USED</h2>
+        <h2 className="text-md-6">{t("variablesUsed")}</h2>
         <div className="mt-5 grid 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1 gap-10 px-5">
           <span className="px-12 py-8 rounded-[20px] border border-solid-black text-[#424242] text-md-5">
-            DEMOGRAPHIC VARIABLES OF THE AREA
+            {t("variable1")}
           </span>
           <span className="px-12 py-8 rounded-[20px] border border-solid-black text-[#424242] text-md-5">
-            ZONE CONNECTIVITY
+            {t("variable2")}
           </span>
           <span className="px-12 py-8 rounded-[20px] border border-solid-black text-[#424242] text-md-5">
-            TRANSFER TIME TO THE MAIN SQUARE
+            {t("variable3")}
           </span>
           <span className="px-12 py-8 rounded-[20px] border border-solid-black text-[#424242] text-md-5">
-            REGULATORY PLANS BY COMMUNE
+            {t("variable4")}
           </span>
         </div>
       </div>
@@ -352,10 +609,7 @@ const Index = () => {
             className="px-10 py-10 border border-black rounded-[20px]"
           >
             <p className="px-2 py-2 w-[100px] h-[100px] rounded-[50%] border border-black bg-[#D9D9D9]"></p>
-            <p className="mt-8 text-[#1B1B1B] text-md-9">
-              Hitmap allowed our company to grow from 5 locations to 47, Matthew
-              Cohen, CEO / Fundador Off The Grid - EE.UU.
-            </p>
+            <p className="mt-8 text-[#1B1B1B] text-md-9">{t("partnerShips")}</p>
             <button className="mt-10 text-[#1B1B1B] text-md-9 font-[600]">
               Hitmap
             </button>
@@ -365,10 +619,7 @@ const Index = () => {
             className="px-10 py-10 border border-black rounded-[20px]"
           >
             <p className="px-2 py-2 w-[100px] h-[100px] rounded-[50%] border border-black bg-[#D9D9D9]"></p>
-            <p className="mt-8 text-[#1B1B1B] text-md-9">
-              Hitmap allowed our company to grow from 5 locations to 47, Matthew
-              Cohen, CEO / Fundador Off The Grid - EE.UU.
-            </p>
+            <p className="mt-8 text-[#1B1B1B] text-md-9">{t("partnerShips")}</p>
             <button className="mt-10 text-[#1B1B1B] text-md-9 font-[600]">
               Hitmap
             </button>
@@ -378,10 +629,7 @@ const Index = () => {
             className="px-10 py-10 border border-black rounded-[20px]"
           >
             <p className="px-2 py-2 w-[100px] h-[100px] rounded-[50%] border border-black bg-[#D9D9D9]"></p>
-            <p className="mt-8 text-[#1B1B1B] text-md-9">
-              Hitmap allowed our company to grow from 5 locations to 47, Matthew
-              Cohen, CEO / Fundador Off The Grid - EE.UU.
-            </p>
+            <p className="mt-8 text-[#1B1B1B] text-md-9">{t("partnerShips")}</p>
             <button className="mt-10 text-[#1B1B1B] text-md-9 font-[600]">
               Hitmap
             </button>
@@ -391,10 +639,7 @@ const Index = () => {
             className="px-10 py-10 border border-black rounded-[20px]"
           >
             <p className="px-2 py-2 w-[100px] h-[100px] rounded-[50%] border border-black bg-[#D9D9D9]"></p>
-            <p className="mt-8 text-[#1B1B1B] text-md-9">
-              Hitmap allowed our company to grow from 5 locations to 47, Matthew
-              Cohen, CEO / Fundador Off The Grid - EE.UU.
-            </p>
+            <p className="mt-8 text-[#1B1B1B] text-md-9">{t("partnerShips")}</p>
             <button className="mt-10 text-[#1B1B1B] text-md-9 font-[600]">
               Hitmap
             </button>
@@ -507,7 +752,7 @@ const Index = () => {
               <div className="flex ">
                 <button className="flex items-center border border-white">
                   <span className=" px-8 py-2.5 text-xs-1 text-white border-r border-solid-white">
-                    VIEW MORE
+                    {t("viewMore")}
                   </span>
                   <div className="py-2.5 px-2">
                     <PiArrowUpRightThin className="text-white text-md" />
