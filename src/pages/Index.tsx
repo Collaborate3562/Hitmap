@@ -198,17 +198,12 @@ const Index = () => {
           >
             {t("newLocations")}
           </p>
-          <div className="relative">
-            <input
-              type="search"
-              placeholder="Services We Offer"
-              className="pr-4 py-3 border-b border-solid-[#BFBFBF] focus:outline-none"
-            />
-            <div className="absolute top-4 right-0">
-              <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
+          <div className="flex justify-between items-center gap-16 cursor-pointer border-solid-[#BFBFBF] focus:outline-none border-b" onClick={() => handleOpenModal(1)}>
+            <div className="pr-4 py-3 text-app-grey">
+              Services We Offer
             </div>
+            <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
           </div>
-
           {openModal && serviceNum === 1 && (
             <div>
               <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -288,15 +283,11 @@ const Index = () => {
           >
             {t("assetManagement")}
           </p>
-          <div className="relative">
-            <input
-              type="search"
-              placeholder="Services We Offer"
-              className="pr-4 py-3 border-b border-solid-[#BFBFBF] focus:outline-none"
-            />
-            <div className="absolute top-4 right-0">
-              <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
+          <div className="flex justify-between items-center gap-16 cursor-pointer border-solid-[#BFBFBF] focus:outline-none border-b" onClick={() => handleOpenModal(2)}>
+            <div className="pr-4 py-3 text-app-grey">
+              Services We Offer
             </div>
+            <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
           </div>
 
           {openModal && serviceNum === 2 && (
@@ -374,15 +365,11 @@ const Index = () => {
           >
             {t("inDepthStudy")}
           </p>
-          <div className="relative">
-            <input
-              type="search"
-              placeholder="Services We Offer"
-              className="pr-4 py-3 border-b border-solid-[#BFBFBF] focus:outline-none"
-            />
-            <div className="absolute top-4 right-0">
-              <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
+          <div className="flex justify-between items-center gap-16 cursor-pointer border-solid-[#BFBFBF] focus:outline-none border-b" onClick={() => handleOpenModal(3)}>
+            <div className="pr-4 py-3 text-app-grey">
+              Services We Offer
             </div>
+            <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
           </div>
 
           {openModal && serviceNum === 3 && (
@@ -455,15 +442,11 @@ const Index = () => {
           >
             {t("capitalGain")}
           </p>
-          <div className="relative">
-            <input
-              type="search"
-              placeholder="Services We Offer"
-              className="pr-4 py-3 border-b border-solid-[#BFBFBF] focus:outline-none"
-            />
-            <div className="absolute top-4 right-0">
-              <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
+          <div className="flex justify-between items-center gap-16 cursor-pointer border-solid-[#BFBFBF] focus:outline-none border-b" onClick={() => handleOpenModal(4)}>
+            <div className="pr-4 py-3 text-app-grey">
+              Services We Offer
             </div>
+            <PiArrowUpRightThin className="text-[#0E0E0E] text-md" />
           </div>
 
           {openModal && serviceNum === 4 && (
